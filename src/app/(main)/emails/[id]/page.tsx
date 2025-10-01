@@ -6,13 +6,6 @@ import { emails as initialEmails } from '@/lib/data';
 import type { Email } from '@/lib/types';
 import { HelpReplyDialog } from '@/components/help-reply-dialog';
 
-export async function generateStaticParams() {
-  const emails = await Promise.resolve(initialEmails);
-  return emails.map((email) => ({
-    id: email.id,
-  }));
-}
-
 export default function EmailPage({ params }: { params: { id: string } }) {
   const [emails, setEmails] = useState(initialEmails);
   const [isReplyDialogOpen, setReplyDialogOpen] = useState(false);
