@@ -1,9 +1,10 @@
+
 export const translations = {
   en: {
     inbox: 'Inbox',
     dashboard: 'Dashboard',
     chat: 'Chat',
-    calendar: 'Calendar',
+    calendar: 'Agenda',
     settings: 'Settings',
     search_emails: 'Search emails...',
     new_email: 'New Email',
@@ -38,12 +39,15 @@ export const translations = {
     close: 'Close',
     copy_reply: 'Copy Reply',
     reply_copied: 'Reply copied to clipboard!',
+    add_event: 'Add Event',
+    no_events: 'No events scheduled',
+    no_events_description: 'Your agenda is empty. Add a new event or let Luca create one from your emails.',
   },
   fr: {
     inbox: 'Boîte de réception',
     dashboard: 'Tableau de bord',
     chat: 'Discussion',
-    calendar: 'Calendrier',
+    calendar: 'Agenda',
     settings: 'Paramètres',
     search_emails: 'Rechercher des e-mails...',
     new_email: 'Nouveau message',
@@ -78,12 +82,15 @@ export const translations = {
     close: 'Fermer',
     copy_reply: 'Copier la réponse',
     reply_copied: 'Réponse copiée dans le presse-papiers !',
+    add_event: 'Ajouter un événement',
+    no_events: 'Aucun événement programmé',
+    no_events_description: 'Votre agenda est vide. Ajoutez un nouvel événement ou laissez Luca en créer un à partir de vos e-mails.',
   },
   derja: {
     inbox: 'علبة الوارد',
     dashboard: 'لوحة القيادة',
     chat: 'دردشة',
-    calendar: 'رزنامة',
+    calendar: 'أجندة',
     settings: 'الضبط',
     search_emails: 'لوّج في الإيميلات...',
     new_email: 'إيميل جديد',
@@ -118,6 +125,9 @@ export const translations = {
     close: 'سكر',
     copy_reply: 'انسخ الجواب',
     reply_copied: 'تم نسخ الجواب!',
+    add_event: 'زيد حدث',
+    no_events: 'ما فماش أحداث مبرمجة',
+    no_events_description: 'الأجندة متاعك فارغة. زيد حدث جديد ولا خلي لوكا يعمل واحد من الإيميلات متاعك.',
   },
 };
 

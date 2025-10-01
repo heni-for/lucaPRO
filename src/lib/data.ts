@@ -1,4 +1,5 @@
-import type { Email } from './types';
+
+import type { Email, PlanningItem } from './types';
 
 export const emails: Email[] = [
   {
@@ -111,5 +112,37 @@ export const emails: Email[] = [
     `,
     isRead: true,
     receivedDate: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(),
+  },
+];
+
+export const planningItems: PlanningItem[] = [
+  {
+    id: 'plan-1',
+    title: 'Project Alpha Weekly Sync',
+    description: 'Discuss progress on Project Alpha with the team.',
+    startTime: new Date(Date.now() + 1000 * 60 * 60 * 20).toISOString(),
+    endTime: new Date(Date.now() + 1000 * 60 * 60 * 21).toISOString(),
+    location: 'Online - Google Meet',
+    source: 'email',
+    sourceId: '1',
+  },
+  {
+    id: 'plan-2',
+    title: 'Follow up on Invoice 123',
+    description: 'Check status of unpaid invoice with Youssef Ben Ali.',
+    startTime: new Date(Date.now() + 1000 * 60 * 60 * 48).toISOString(),
+    endTime: new Date(Date.now() + 1000 * 60 * 60 * 48.5).toISOString(),
+    source: 'email',
+    sourceId: '3',
+  },
+  {
+    id: 'plan-3',
+    title: 'Call with Jean-Pierre',
+    description: 'Discuss marketing campaign copy for Q3.',
+    startTime: new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString(),
+    endTime: new Date(Date.now() + 1000 * 60 * 60 * 73).toISOString(),
+    location: 'Phone Call',
+    source: 'email',
+    sourceId: '2',
   },
 ];
