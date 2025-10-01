@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
-import { getSummaryAction } from '@/app/actions';
+import { getSummaryAction, textToSpeechAction } from '@/app/actions';
 import { useApp } from '@/hooks/use-app';
 import type { Email } from '@/lib/types';
 import {
@@ -30,6 +30,8 @@ import {
   Trash2,
   Sparkles,
   PenSquare,
+  Volume2,
+  Loader,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
@@ -44,6 +46,8 @@ export function EmailView({ email, onDraftReply }: EmailViewProps) {
   const { toast } = useToast();
   const [summary, setSummary] = useState<string | null>(null);
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
+  const [isLoadingAudio, setIsLoadingAudio] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleSummarize = async () => {
     setIsLoadingSummary(true);
@@ -60,9 +64,31 @@ export function EmailView({ email, onDraftReply }: EmailViewProps) {
     }
     setIsLoadingSummary(false);
   };
+  
+  const handleTextToSpeech = async () => {
+    if (!summary) return;
+    setIsLoadingAudio(true);
+    const result = await textToSpeechAction(summary);
+    setIsLoadingAudio(false);
+
+    if (result.audioUrl) {
+      if (audioRef.current) {
+        audioRef.current.src = result.audioUrl;
+        audioRef.current.play();
+      }
+    } else {
+       toast({
+        variant: 'destructive',
+        title: 'Audio Error',
+        description: result.error || 'Failed to generate audio.',
+      });
+    }
+  };
+
 
   return (
     <div className="flex flex-1 flex-col">
+       <audio ref={audioRef} className="hidden" />
       <div className="flex items-center p-2 gap-2">
         <Button variant="outline" size="icon" asChild>
           <Link href="/emails">
@@ -123,9 +149,17 @@ export function EmailView({ email, onDraftReply }: EmailViewProps) {
 
         {(isLoadingSummary || summary) && (
           <Card className="mt-6" dir="rtl">
-            <CardHeader>
-              <CardTitle>{t('summary')}</CardTitle>
-              <CardDescription>{t('summary_description')}</CardDescription>
+            <CardHeader className="flex-row items-center justify-between">
+              <div>
+                <CardTitle>{t('summary')}</CardTitle>
+                <CardDescription>{t('summary_description')}</CardDescription>
+              </div>
+              {summary && !isLoadingSummary && (
+                <Button onClick={handleTextToSpeech} disabled={isLoadingAudio} variant="outline" size="icon">
+                  {isLoadingAudio ? <Loader className="h-4 w-4 animate-spin" /> : <Volume2 className="h-4 w-4" />}
+                  <span className="sr-only">Read summary aloud</span>
+                </Button>
+              )}
             </CardHeader>
             <CardContent>
               {isLoadingSummary ? (

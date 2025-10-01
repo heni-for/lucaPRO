@@ -2,6 +2,7 @@
 
 import { summarizeEmailInDerja } from '@/ai/flows/summarize-email-in-derja';
 import { draftReply } from '@/ai/flows/help-draft-reply';
+import { generateAudioFromText } from '@/ai/flows/text-to-speech';
 
 export async function getSummaryAction(emailBody: string): Promise<{ summary?: string; error?: string }> {
   if (!emailBody) {
@@ -26,5 +27,18 @@ export async function draftReplyAction(emailBody: string, userPrompt: string): P
   } catch (error) {
     console.error('Error generating reply:', error);
     return { error: 'Failed to generate reply. Please try again later.' };
+  }
+}
+
+export async function textToSpeechAction(text: string): Promise<{ audioUrl?: string; error?: string }> {
+  if (!text) {
+    return { error: 'Text is required for TTS.' };
+  }
+  try {
+    const result = await generateAudioFromText(text);
+    return { audioUrl: result.audioUrl };
+  } catch (error) {
+    console.error('Error generating audio:', error);
+    return { error: 'Failed to generate audio. Please try again later.' };
   }
 }
