@@ -29,16 +29,18 @@ import {
   ReplyAll,
   Trash2,
   Sparkles,
+  PenSquare,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
 
 interface EmailViewProps {
   email: Email;
+  onDraftReply: () => void;
 }
 
-export function EmailView({ email }: EmailViewProps) {
-  const { t, dir } = useApp();
+export function EmailView({ email, onDraftReply }: EmailViewProps) {
+  const { t } = useApp();
   const { toast } = useToast();
   const [summary, setSummary] = useState<string | null>(null);
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
@@ -107,17 +109,23 @@ export function EmailView({ email }: EmailViewProps) {
             <Button variant="outline"><Reply className="mr-2 h-4 w-4" />Reply</Button>
             <Button variant="outline"><ReplyAll className="mr-2 h-4 w-4" />Reply All</Button>
             <Button variant="outline"><Forward className="mr-2 h-4 w-4" />Forward</Button>
-            <Button onClick={handleSummarize} disabled={isLoadingSummary} className="bg-accent text-accent-foreground hover:bg-accent/90 ml-auto">
-              <Sparkles className="mr-2 h-4 w-4" />
-              {t('summarize_derja')}
-            </Button>
+            <div className='ml-auto flex items-center gap-2'>
+              <Button onClick={onDraftReply} variant="outline">
+                <PenSquare className="mr-2 h-4 w-4" />
+                {t('help_draft_reply')}
+              </Button>
+              <Button onClick={handleSummarize} disabled={isLoadingSummary} className="bg-accent text-accent-foreground hover:bg-accent/90">
+                <Sparkles className="mr-2 h-4 w-4" />
+                {t('summarize_derja')}
+              </Button>
+            </div>
         </div>
 
         {(isLoadingSummary || summary) && (
           <Card className="mt-6" dir="rtl">
             <CardHeader>
               <CardTitle>{t('summary')}</CardTitle>
-              <CardDescription>{t('summary')}</CardDescription>
+              <CardDescription>{t('summary_description')}</CardDescription>
             </CardHeader>
             <CardContent>
               {isLoadingSummary ? (
