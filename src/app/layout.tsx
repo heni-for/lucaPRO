@@ -4,8 +4,8 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'DerjaMail',
-  description: 'Email management with AI-powered Derja summarization.',
+  title: 'Luca',
+  description: 'AI-powered Smart Email Assistant.',
 };
 
 export default function RootLayout({

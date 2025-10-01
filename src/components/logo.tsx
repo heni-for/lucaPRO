@@ -7,6 +7,6 @@ export const Logo = ({ className }: { className?: string }) => (
     <div className="rounded-lg bg-sidebar-primary p-2">
       <Mail className="size-6 text-sidebar-primary-foreground" />
     </div>
-    <span className="text-xl font-bold font-headline text-sidebar-foreground">DerjaMail</span>
+    <span className="text-xl font-bold font-headline text-sidebar-foreground">Luca</span>
   </div>
 );
