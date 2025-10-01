@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview A conversational AI agent that maintains history.
+ * @fileOverview A conversational AI agent that maintains history and responds in Derja.
  *
  * - continueConversation - A function that handles the conversation.
  * - ConversationInput - The input type for the continueConversation function.
@@ -21,7 +21,7 @@ const ConversationInputSchema = z.object({
 export type ConversationInput = z.infer<typeof ConversationInputSchema>;
 
 const ConversationOutputSchema = z.object({
-  reply: z.string().describe('The AI-generated reply.'),
+  reply: z.string().describe('The AI-generated reply in Derja.'),
 });
 export type ConversationOutput = z.infer<typeof ConversationOutputSchema>;
 
@@ -36,19 +36,15 @@ const conversationalChatFlow = ai.defineFlow(
     outputSchema: ConversationOutputSchema,
   },
   async ({history}) => {
-    const chat = ai.getHistory();
-    for (const message of history) {
-        if (message.role === 'user') {
-            await chat.addUserMessage(message.content);
-        } else {
-            await chat.addModelMessage(message.content);
-        }
-    }
     
-    const {output} = await chat.send();
+    const { text } = await ai.generate({
+        system: 'You are an AI assistant named Luca. You MUST reply exclusively in Tunisian Derja. Do not use any other language.',
+        history: history.map(m => ({...m, content: [{text: m.content}]})),
+        prompt: ''
+    });
 
     return {
-        reply: output as string
+        reply: text
     };
   }
 );

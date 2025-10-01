@@ -20,9 +20,9 @@ const formSchema = z.object({
 });
 
 export default function ChatPage() {
-    const { t } = useApp();
+    const { t, dir } = useApp();
     const [messages, setMessages] = useState<ChatMessage[]>([
-        { role: 'model', content: "Welcome to Luca! How can I help you with your emails or agenda today?" }
+        { role: 'model', content: "أهلاً بيك في لوكا! كيفاش نجم نعاونك في إيميلاتك ولا في الأجندة متاعك اليوم؟" }
     ]);
     const [isLoading, setIsLoading] = useState(false);
     const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -63,17 +63,17 @@ export default function ChatPage() {
             const botMessage: ChatMessage = { role: 'model', content: result.reply };
             setMessages(prev => [...prev, botMessage]);
         } else {
-            const errorMessage: ChatMessage = { role: 'model', content: result.error || "Sorry, I encountered an error." };
+            const errorMessage: ChatMessage = { role: 'model', content: result.error || "عذراً، صارت مشكلة." };
             setMessages(prev => [...prev, errorMessage]);
         }
     }
 
   return (
     <div className="flex flex-col h-full max-h-[calc(100vh-8rem)]">
-        <Card className="flex flex-col flex-1">
+        <Card className="flex flex-col flex-1" dir={dir}>
         <CardHeader>
-            <CardTitle>Conversational AI</CardTitle>
-            <CardDescription>Interact with Luca using a natural language interface.</CardDescription>
+            <CardTitle>{t('chat')}</CardTitle>
+            <CardDescription>تفاعل مع لوكا باستعمال لغة طبيعية.</CardDescription>
         </CardHeader>
         <CardContent className="flex-1 overflow-hidden">
             <ScrollArea className="h-full pr-4" ref={scrollAreaRef}>
@@ -117,6 +117,7 @@ export default function ChatPage() {
                     {...form.register('prompt')}
                     placeholder={t('your_prompt_placeholder')} 
                     disabled={isLoading}
+                    dir={dir}
                 />
                 <Button type="submit" size="icon" disabled={isLoading}>
                     <Send className="h-4 w-4" />
