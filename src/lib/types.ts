@@ -19,8 +19,13 @@ export type PlanningItem = {
   title: string;
   description: string;
   startTime: string;
-  endTime: string;
+  endTime:string;
   location?: string;
   source: 'email' | 'conversation' | 'manual';
   sourceId?: string; // e.g., email.id
+};
+
+export type ChatMessage = {
+  role: 'user' | 'model';
+  content: string;
 };

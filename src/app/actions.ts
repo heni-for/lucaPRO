@@ -3,6 +3,9 @@
 import { summarizeEmailInDerja } from '@/ai/flows/summarize-email-in-derja';
 import { draftReply } from '@/ai/flows/help-draft-reply';
 import { generateAudioFromText } from '@/ai/flows/text-to-speech';
+import { continueConversation } from '@/ai/flows/conversational-chat';
+import type { ChatMessage } from '@/lib/types';
+
 
 export async function getSummaryAction(emailBody: string): Promise<{ summary?: string; error?: string }> {
   if (!emailBody) {
@@ -40,5 +43,15 @@ export async function textToSpeechAction(text: string): Promise<{ audioUrl?: str
   } catch (error) {
     console.error('Error generating audio:', error);
     return { error: 'Failed to generate audio. Please try again later.' };
+  }
+}
+
+export async function chatWithHistoryAction(history: ChatMessage[]): Promise<{ reply?: string; error?: string }> {
+  try {
+    const result = await continueConversation({ history });
+    return { reply: result.reply };
+  } catch (error) {
+    console.error('Error in conversation:', error);
+    return { error: 'Failed to get a response. Please try again.' };
   }
 }
