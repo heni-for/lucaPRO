@@ -1,12 +1,13 @@
 'use client';
 import { useState } from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { EmailView } from '@/components/email-view';
 import { emails as initialEmails } from '@/lib/data';
 import type { Email } from '@/lib/types';
 import { HelpReplyDialog } from '@/components/help-reply-dialog';
 
-export default function EmailPage({ params }: { params: { id: string } }) {
+export default function EmailPage() {
+  const params = useParams<{ id: string }>();
   const [emails, setEmails] = useState(initialEmails);
   const [isReplyDialogOpen, setReplyDialogOpen] = useState(false);
   
