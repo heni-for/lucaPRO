@@ -25,6 +25,7 @@ import { ThemeSwitcher } from '@/components/theme-switcher';
 import { Bell, Search } from 'lucide-react';
 import { AppSidebarNav } from '@/components/app-sidebar-nav';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 function Header() {
   const { t } = useApp();
@@ -67,7 +68,9 @@ function Header() {
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/">Logout</Link>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
