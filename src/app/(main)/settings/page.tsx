@@ -8,30 +8,30 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useApp } from '@/hooks/use-app';
 
 export default function SettingsPage() {
-  const { t } = useApp();
+  const { t, dir } = useApp();
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6" dir={dir}>
         <Card>
         <CardHeader>
-            <CardTitle>AI Configuration</CardTitle>
-            <CardDescription>Manage settings for AI models and processing parameters.</CardDescription>
+            <CardTitle>{t('ai_settings')}</CardTitle>
+            <CardDescription>{t('ai_settings_description')}</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
             <div className="flex items-center justify-between space-x-2">
                 <Label htmlFor="ollama-enabled" className="flex flex-col space-y-1">
-                <span>Derja Model (Ollama)</span>
+                <span>{t('derja_model_label')}</span>
                 <span className="font-normal leading-snug text-muted-foreground">
-                    Enable custom Derja language model for summaries and replies.
+                    {t('derja_model_description')}
                 </span>
                 </Label>
                 <Switch id="ollama-enabled" defaultChecked disabled />
             </div>
             <div className="flex items-center justify-between space-x-2">
                 <Label htmlFor="tts-enabled" className="flex flex-col space-y-1">
-                <span>Text-to-Speech (TTS)</span>
+                <span>{t('tts_label')}</span>
                 <span className="font-normal leading-snug text-muted-foreground">
-                    Enable voice output for summaries in Derja.
+                    {t('tts_description')}
                 </span>
                 </Label>
                 <Switch id="tts-enabled" defaultChecked />
@@ -40,30 +40,30 @@ export default function SettingsPage() {
         </Card>
         <Card>
             <CardHeader>
-                <CardTitle>Processing Parameters</CardTitle>
-                <CardDescription>Fine-tune the behavior of the AI models.</CardDescription>
+                <CardTitle>{t('processing_parameters')}</CardTitle>
+                <CardDescription>{t('processing_parameters_description')}</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
                  <div className="grid gap-2">
-                    <Label htmlFor="temperature">Temperature</Label>
+                    <Label htmlFor="temperature">{t('temperature_label')}</Label>
                     <Slider id="temperature" defaultValue={[0.5]} max={1} step={0.1} disabled />
-                    <p className="text-sm text-muted-foreground">Controls randomness. Lower is more deterministic.</p>
+                    <p className="text-sm text-muted-foreground">{t('temperature_description')}</p>
                 </div>
                  <div className="grid gap-2">
-                    <Label htmlFor="max-tokens">Max Tokens</Label>
+                    <Label htmlFor="max-tokens">{t('max_tokens_label')}</Label>
                     <Slider id="max-tokens" defaultValue={[256]} min={50} max={512} step={16} disabled />
-                    <p className="text-sm text-muted-foreground">Maximum length of the generated summary or reply.</p>
+                    <p className="text-sm text-muted-foreground">{t('max_tokens_description')}</p>
                 </div>
             </CardContent>
         </Card>
         <Card>
             <CardHeader>
-                <CardTitle>Email Sync</CardTitle>
-                <CardDescription>Configure how Luca fetches your emails.</CardDescription>
+                <CardTitle>{t('email_sync')}</CardTitle>
+                <CardDescription>{t('email_sync_description')}</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
                  <div className="grid gap-2">
-                    <Label htmlFor="sync-interval">Sync Interval</Label>
+                    <Label htmlFor="sync-interval">{t('sync_interval_label')}</Label>
                     <Select defaultValue="5" disabled>
                         <SelectTrigger id="sync-interval" className="w-[180px]">
                             <SelectValue placeholder="Select interval" />
@@ -75,7 +75,7 @@ export default function SettingsPage() {
                             <SelectItem value="30">30 minutes</SelectItem>
                         </SelectContent>
                     </Select>
-                    <p className="text-sm text-muted-foreground">How often to check for new emails.</p>
+                    <p className="text-sm text-muted-foreground">{t('sync_interval_description')}</p>
                 </div>
             </CardContent>
         </Card>

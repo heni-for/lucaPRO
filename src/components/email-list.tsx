@@ -13,14 +13,14 @@ interface EmailListProps {
 }
 
 export function EmailList({ emails }: EmailListProps) {
-  const { t, language } = useApp();
+  const { t } = useApp();
 
   if (emails.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 text-center h-80">
         <Inbox className="w-16 h-16 text-muted-foreground" />
         <h3 className="text-2xl font-bold tracking-tight">{t('no_emails_found')}</h3>
-        <p className="text-sm text-muted-foreground">{t('no_emails_found')}</p>
+        <p className="text-sm text-muted-foreground">{t('no_emails_found_description')}</p>
       </div>
     );
   }

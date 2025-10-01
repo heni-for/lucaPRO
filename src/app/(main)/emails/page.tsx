@@ -27,7 +27,7 @@ import { EmailList } from '@/components/email-list';
 type FilterStatus = 'all' | 'read' | 'unread';
 
 export default function EmailsPage() {
-  const { t } = useApp();
+  const { t, dir } = useApp();
   const [emails, setEmails] = useState<Email[]>(initialEmails);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all');
@@ -83,11 +83,11 @@ export default function EmailsPage() {
           </Button>
         </div>
       </div>
-      <Card>
+      <Card dir={dir}>
         <CardHeader>
           <CardTitle>{t('inbox')}</CardTitle>
           <CardDescription>
-            {t('inbox')}
+            {t('inbox_description')}
           </CardDescription>
         </CardHeader>
         <CardContent>

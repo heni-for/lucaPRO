@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { BarChart, Clock, Zap, Mail, Users, Star } from 'lucide-react';
+import { Clock, Mail, Users, Star } from 'lucide-react';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Bar, XAxis, YAxis, CartesianGrid, BarChart as RechartsBarChart } from "recharts";
 import { useApp } from '@/hooks/use-app';
@@ -24,65 +24,65 @@ const chartConfig = {
 }
 
 export default function DashboardPage() {
-    const { t } = useApp();
+    const { t, dir } = useApp();
   return (
-    <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4" dir={dir}>
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-                Total Emails Processed
+                {t('total_emails_processed')}
             </CardTitle>
             <Mail className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
             <div className="text-2xl font-bold">12,543</div>
             <p className="text-xs text-muted-foreground">
-                +12.1% from last month
+                {t('from_last_month')}
             </p>
             </CardContent>
         </Card>
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-                Avg. Summarization Speed
+                {t('avg_summarization_speed')}
             </CardTitle>
             <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
             <div className="text-2xl font-bold">3.2s</div>
             <p className="text-xs text-muted-foreground">
-                -0.5s improvement from last month
+                {t('speed_improvement')}
             </p>
             </CardContent>
         </Card>
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Users</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('active_users')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
             <div className="text-2xl font-bold">1</div>
             <p className="text-xs text-muted-foreground">
-                The one and only you!
+                {t('active_users_description')}
             </p>
             </CardContent>
         </Card>
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Summarization Accuracy</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('summarization_accuracy')}</CardTitle>
             <Star className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
             <div className="text-2xl font-bold">92%</div>
             <p className="text-xs text-muted-foreground">
-                Based on user feedback
+                {t('accuracy_feedback')}
             </p>
             </CardContent>
         </Card>
         <Card className="col-span-1 md:col-span-2 lg:col-span-4">
             <CardHeader>
-                <CardTitle>Email Volume Trends</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>{t('email_volume_trends')}</CardTitle>
+                <CardDescription>{t('email_volume_description')}</CardDescription>
             </CardHeader>
             <CardContent className="pl-2">
                  <ChartContainer config={chartConfig} className="w-full h-[300px]">

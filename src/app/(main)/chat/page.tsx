@@ -166,7 +166,7 @@ export default function ChatPage() {
         <CardHeader className="flex-row items-center">
             <div className='flex-1'>
                 <CardTitle>{t('chat')}</CardTitle>
-                <CardDescription>تفاعل مع لوكا باستعمال لغة طبيعية.</CardDescription>
+                <CardDescription>{t('chat_description')}</CardDescription>
             </div>
              {(isListening || isSpeaking) && (
                 <div className="flex items-center gap-2 text-muted-foreground">
@@ -236,5 +236,3 @@ export default function ChatPage() {
     </div>
   );
 }
-
-    

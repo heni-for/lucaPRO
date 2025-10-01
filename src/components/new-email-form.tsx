@@ -40,7 +40,7 @@ interface NewEmailFormProps {
 }
 
 export function NewEmailForm({ isOpen, onOpenChange, onEmailCreated }: NewEmailFormProps) {
-  const { t } = useApp();
+  const { t, dir } = useApp();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -76,10 +76,10 @@ export function NewEmailForm({ isOpen, onOpenChange, onEmailCreated }: NewEmailF
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]" dir={dir}>
         <DialogHeader>
           <DialogTitle>{t('create_mock_email')}</DialogTitle>
-          <DialogDescription>{t('create_mock_email')}</DialogDescription>
+          <DialogDescription>{t('create_mock_email_description')}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

@@ -63,13 +63,13 @@ function Header() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>{t('my_account')}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuItem>{t('settings')}</DropdownMenuItem>
+          <DropdownMenuItem>{t('support')}</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <Link href="/">Logout</Link>
+            <Link href="/">{t('logout')}</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -83,12 +83,14 @@ export default function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { dir } = useApp();
   return (
     <SidebarProvider>
       <Sidebar
         variant="sidebar"
         collapsible="icon"
         className="border-sidebar-border bg-sidebar text-sidebar-foreground"
+        side={dir === 'rtl' ? 'right' : 'left'}
       >
         <SidebarHeader className="p-4">
           <Logo />

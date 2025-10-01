@@ -20,7 +20,7 @@ export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('system');
-  const [language, setLanguageState] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('derja');
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -31,6 +31,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     if (storedLanguage) {
       setLanguageState(storedLanguage);
+    } else {
+      // If no language is stored, default to derja
+      setLanguageState('derja');
     }
     setIsMounted(true);
   }, []);
