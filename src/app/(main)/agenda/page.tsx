@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import type { PlanningItem } from '@/lib/types';
-import { PlusCircle, Calendar as CalendarIcon, MapPin, Users, Package, AlertTriangle, CheckCircle, Edit, Trash2, XCircle } from 'lucide-react';
+import { PlusCircle, Calendar as CalendarIcon, MapPin, User, Package, AlertTriangle, CheckCircle, Edit, Trash2, XCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { useApp } from '@/hooks/use-app';
 import { planningItems as mockPlanningItems } from '@/lib/data';
@@ -105,7 +105,7 @@ export default function AgendaPage() {
                 )}
                  {item.people && item.people.length > 0 && (
                   <div className="flex items-start gap-2">
-                    <Users className="h-4 w-4 text-muted-foreground mt-0.5" />
+                    <User className="h-4 w-4 text-muted-foreground mt-0.5" />
                     <div className="flex flex-wrap gap-1">
                       {item.people.map(person => (
                         <Badge key={person} variant="secondary">{person}</Badge>
