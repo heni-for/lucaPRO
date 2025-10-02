@@ -16,6 +16,19 @@ export default function AgendaPage() {
   const { t } = useApp();
   const [planningItems, setPlanningItems] = useState<PlanningItem[]>(mockPlanningItems);
 
+  const handleStatusChange = (itemId: string, newStatus: PlanningItem['status']) => {
+    setPlanningItems(prevItems =>
+      prevItems.map(item =>
+        item.id === itemId ? { ...item, status: newStatus } : item
+      )
+    );
+  };
+
+  const handleDelete = (itemId: string) => {
+    setPlanningItems(prevItems => prevItems.filter(item => item.id !== itemId));
+  };
+
+
   const getStatusVariant = (status: PlanningItem['status']) => {
     switch (status) {
       case 'Confirmed':
@@ -49,8 +62,6 @@ export default function AgendaPage() {
               <p className="text-lg font-semibold">{t('no_events')}</p>
               <p className="text-sm text-muted-foreground max-w-xs mx-auto">
                 {t('no_events_description')}
-                <br/>
-                Or just talk to Luca to create one automatically.
               </p>
             </CardContent>
           </Card>
@@ -109,18 +120,18 @@ export default function AgendaPage() {
                     <Edit className="h-4 w-4" />
                     <span className="sr-only">Edit</span>
                  </Button>
-                 <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
+                 <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive" onClick={() => handleDelete(item.id)}>
                     <Trash2 className="h-4 w-4" />
                      <span className="sr-only">Delete</span>
                  </Button>
                  {item.status === 'Planned' && (
-                    <Button variant="secondary" size="sm" className='ml-2'>
+                    <Button variant="secondary" size="sm" className='ml-2' onClick={() => handleStatusChange(item.id, 'Confirmed')}>
                         <CheckCircle className="mr-2 h-4 w-4"/>
                         Confirm
                     </Button>
                  )}
                   {item.status === 'Confirmed' && new Date(`${item.date}T${item.time}`) < new Date() && (
-                    <Button variant="default" size="sm" className='ml-2'>
+                    <Button variant="default" size="sm" className='ml-2' onClick={() => handleStatusChange(item.id, 'Done')}>
                         <CheckCircle className="mr-2 h-4 w-4"/>
                         Mark as Done
                     </Button>
