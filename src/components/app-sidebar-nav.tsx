@@ -14,6 +14,8 @@ import {
   Users,
   Bell,
   Settings,
+  HeartPulse,
+  FileText,
 } from 'lucide-react';
 import { useApp } from '@/hooks/use-app';
 import type { TranslationKey } from '@/lib/translations';
@@ -32,8 +34,10 @@ export function AppSidebarNav() {
     { href: '/dashboard', labelKey: 'dashboard', icon: <LayoutDashboard /> },
     { href: '/chat', labelKey: 'chat', icon: <MessageCircle /> },
     { href: '/agenda', labelKey: 'calendar', icon: <Calendar /> },
-    { href: '/contacts', labelKey: 'contacts', icon: <Users /> },
     { href: '/reminders', labelKey: 'reminders', icon: <Bell /> },
+    { href: '/contacts', labelKey: 'contacts', icon: <Users /> },
+    { href: '/health', labelKey: 'health_habits', icon: <HeartPulse /> },
+    { href: '/notes', labelKey: 'notes_knowledge', icon: <FileText /> },
   ];
 
   const settingsNav: NavItem = {
