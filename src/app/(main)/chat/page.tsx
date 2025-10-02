@@ -204,7 +204,7 @@ export default function ChatPage() {
                                     <AvatarFallback><BotMessageSquare/></AvatarFallback>
                                 </Avatar>
                             )}
-                            <div className={cn('rounded-lg px-4 py-3 max-w-[75%]' relative group', message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted')}>
+                            <div className={cn('rounded-lg px-4 py-3 max-w-[75%] relative group', message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted')}>
                                 <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                                 {message.role === 'model' && (
                                    <Button 
