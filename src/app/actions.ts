@@ -47,17 +47,15 @@ export async function textToSpeechAction(text: string): Promise<{ audioUrl?: str
 }
 
 export async function chatWithHistoryAction(history: ChatMessage[]): Promise<{ reply?: string; error?: string }> {
+  if (!history || history.length === 0) {
+    return { error: 'Chat history is required.' };
+  }
   try {
-    const historyForAI = history.map(m => ({
-      role: m.sender === 'luca' ? 'model' as const : 'user' as const,
-      content: m.message,
-    }));
-
-    // The AI expects an array of { role, content }
-    const result = await continueConversation({ history: historyForAI });
+    const result = await continueConversation({ history });
     return { reply: result.reply };
   } catch (error) {
     console.error('Error in conversation:', error);
-    return { error: 'Failed to get a response. Please try again.' };
+    const errorMessage = error instanceof Error ? error.message : 'Failed to get a response. Please try again.';
+    return { error: errorMessage };
   }
 }

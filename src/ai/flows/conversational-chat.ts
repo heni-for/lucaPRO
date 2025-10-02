@@ -37,7 +37,7 @@ const conversationalChatFlow = ai.defineFlow(
   },
   async ({history}) => {
     
-    const lastUserMessage = history[history.length -1];
+    const lastUserMessage = history.length > 0 ? history[history.length - 1] : null;
     if (!lastUserMessage || lastUserMessage.role !== 'user') {
         return { reply: "فماش سؤال؟" }; // No question?
     }

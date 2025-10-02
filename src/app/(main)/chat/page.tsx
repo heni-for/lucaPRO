@@ -252,7 +252,7 @@ export default function ChatPage() {
                     disabled={isLoading || isListening}
                     dir={dir}
                 />
-                <Button type="submit" size="icon" disabled={isLoading || isListening}>
+                <Button type="submit" size="icon" disabled={isLoading || isListening || !form.watch('prompt')}>
                     <Send className="h-4 w-4" />
                     <span className="sr-only">Send</span>
                 </Button>
