@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
-import { getSummaryAction, textToSpeechAction } from '@/app/actions';
+import { getSummaryAction, textToSpeechAction } from '@/app/actions/chatActions';
 import { useApp } from '@/hooks/use-app';
 import type { Email } from '@/lib/types';
 import {

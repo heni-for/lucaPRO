@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { draftReplyAction } from '@/app/actions';
+import { draftReplyAction } from '@/app/actions/chatActions';
 import { useApp } from '@/hooks/use-app';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
