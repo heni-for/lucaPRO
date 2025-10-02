@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import type { PlanningItem } from '@/lib/types';
-import { PlusCircle, Calendar as CalendarIcon, Clock, MapPin, Users, Package, AlertTriangle, CheckCircle, Edit, Trash2 } from 'lucide-react';
+import { PlusCircle, Calendar as CalendarIcon, MapPin, Users, Package, AlertTriangle, CheckCircle, Edit, Trash2, XCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { useApp } from '@/hooks/use-app';
 import { planningItems as mockPlanningItems } from '@/lib/data';
@@ -22,6 +22,14 @@ export default function AgendaPage() {
         item.id === itemId ? { ...item, status: newStatus } : item
       )
     );
+  };
+  
+  const cycleStatus = (item: PlanningItem) => {
+    if (item.status === 'Planned') {
+      handleStatusChange(item.id, 'Confirmed');
+    } else if (item.status === 'Confirmed') {
+      handleStatusChange(item.id, 'Done');
+    }
   };
 
   const handleDelete = (itemId: string) => {
@@ -73,7 +81,13 @@ export default function AgendaPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                     <CardTitle className="pr-4">{item.title}</CardTitle>
-                    <Badge variant={getStatusVariant(item.status)}>{item.status}</Badge>
+                    <Badge 
+                      variant={getStatusVariant(item.status)}
+                      className="cursor-pointer"
+                      onClick={() => cycleStatus(item)}
+                    >
+                      {item.status}
+                    </Badge>
                 </div>
                 <CardDescription>{item.description}</CardDescription>
               </CardHeader>
@@ -134,6 +148,12 @@ export default function AgendaPage() {
                     <Button variant="default" size="sm" className='ml-2' onClick={() => handleStatusChange(item.id, 'Done')}>
                         <CheckCircle className="mr-2 h-4 w-4"/>
                         Mark as Done
+                    </Button>
+                 )}
+                 {item.status !== 'Canceled' && (
+                    <Button variant="ghost" size="sm" className='text-muted-foreground' onClick={() => handleStatusChange(item.id, 'Canceled')}>
+                        <XCircle className="mr-2 h-4 w-4"/>
+                        Cancel
                     </Button>
                  )}
               </CardFooter>
