@@ -1,107 +1,86 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Clock, Mail, Users, Star } from 'lucide-react';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Bar, XAxis, YAxis, CartesianGrid, BarChart as RechartsBarChart } from "recharts";
+import { Clock, Mail, Users, Star, MessageCircle, Calendar } from 'lucide-react';
 import { useApp } from '@/hooks/use-app';
-
-
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-]
-
-const chartConfig = {
-  desktop: {
-    label: "Emails",
-    color: "hsl(var(--primary))",
-  },
-}
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export default function DashboardPage() {
     const { t, dir } = useApp();
   return (
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4" dir={dir}>
-        <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-                {t('total_emails_processed')}
-            </CardTitle>
-            <Mail className="h-4 w-4 text-muted-foreground" />
+        <div className="lg:col-span-4">
+            <h1 className="text-3xl font-bold">Welcome back!</h1>
+            <p className="text-muted-foreground">Here's a summary of your day with Luca.</p>
+        </div>
+
+        <Card className="lg:col-span-2 bg-background/80 backdrop-blur-sm">
+            <CardHeader>
+                <CardTitle>{t('chat')}</CardTitle>
+                <CardDescription>{t('chat_description')}</CardDescription>
             </CardHeader>
             <CardContent>
-            <div className="text-2xl font-bold">12,543</div>
-            <p className="text-xs text-muted-foreground">
-                {t('from_last_month')}
-            </p>
+                <p className="text-sm text-muted-foreground mb-4">Your recent conversations with Luca will appear here.</p>
+                 <Button asChild variant="outline">
+                    <Link href="/chat">
+                        Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </Button>
             </CardContent>
         </Card>
-        <Card>
+
+        <Card className="lg:col-span-2 bg-background/80 backdrop-blur-sm">
+            <CardHeader>
+                <CardTitle>{t('calendar')}</CardTitle>
+                <CardDescription>Your upcoming events and appointments.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Today's events will be shown here.</p>
+                 <Button asChild variant="outline">
+                    <Link href="/agenda">
+                        View Agenda <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </Button>
+            </CardContent>
+        </Card>
+
+        <Card className="bg-background/80 backdrop-blur-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-                {t('avg_summarization_speed')}
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">{t('reminders')}</CardTitle>
             <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-            <div className="text-2xl font-bold">3.2s</div>
+            <div className="text-2xl font-bold">3</div>
             <p className="text-xs text-muted-foreground">
-                {t('speed_improvement')}
+                upcoming reminders today
             </p>
             </CardContent>
         </Card>
-        <Card>
+        
+        <Card className="bg-background/80 backdrop-blur-sm">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t('active_users')}</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('contacts')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-            <div className="text-2xl font-bold">1</div>
+            <div className="text-2xl font-bold">5</div>
             <p className="text-xs text-muted-foreground">
-                {t('active_users_description')}
+                new people mentioned
             </p>
             </CardContent>
         </Card>
-        <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t('summarization_accuracy')}</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-            <div className="text-2xl font-bold">92%</div>
-            <p className="text-xs text-muted-foreground">
-                {t('accuracy_feedback')}
-            </p>
-            </CardContent>
-        </Card>
-        <Card className="col-span-1 md:col-span-2 lg:col-span-4">
+
+         <Card className="lg:col-span-4 bg-background/80 backdrop-blur-sm">
             <CardHeader>
-                <CardTitle>{t('email_volume_trends')}</CardTitle>
-                <CardDescription>{t('email_volume_description')}</CardDescription>
+                <CardTitle>Quick Actions</CardTitle>
+                <CardDescription>Some suggestions to get started with Luca.</CardDescription>
             </CardHeader>
-            <CardContent className="pl-2">
-                 <ChartContainer config={chartConfig} className="w-full h-[300px]">
-                    <RechartsBarChart accessibilityLayer data={chartData}>
-                        <CartesianGrid vertical={false} />
-                        <XAxis
-                        dataKey="month"
-                        tickLine={false}
-                        tickMargin={10}
-                        axisLine={false}
-                        />
-                        <YAxis />
-                        <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
-                    </RechartsBarChart>
-                </ChartContainer>
+            <CardContent className="flex flex-wrap gap-2">
+                 <Button variant="secondary">Add a medicine reminder</Button>
+                 <Button variant="secondary">Show my meetings for tomorrow</Button>
+                 <Button variant="secondary">Summarize my last email</Button>
             </CardContent>
       </Card>
     </div>

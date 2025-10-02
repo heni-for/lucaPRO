@@ -4,15 +4,14 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { planningItems as initialPlanningItems } from '@/lib/data';
 import type { PlanningItem } from '@/lib/types';
 import { PlusCircle, Calendar as CalendarIcon, Clock, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { useApp } from '@/hooks/use-app';
 
-export default function CalendarPage() {
+export default function AgendaPage() {
   const { t } = useApp();
-  const [planningItems, setPlanningItems] = useState<PlanningItem[]>(initialPlanningItems);
+  const [planningItems, setPlanningItems] = useState<PlanningItem[]>([]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -26,7 +25,7 @@ export default function CalendarPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {planningItems.length === 0 ? (
-          <Card className="md:col-span-2 lg:col-span-3">
+          <Card className="md:col-span-2 lg:col-span-3 bg-background/80 backdrop-blur-sm">
             <CardContent className="flex flex-col items-center justify-center gap-4 text-center h-80">
               <CalendarIcon className="w-16 h-16 text-muted-foreground" />
               <p className="text-lg font-semibold">{t('no_events')}</p>
@@ -37,7 +36,7 @@ export default function CalendarPage() {
           planningItems
             .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
             .map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id} className="bg-background/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDescription>{item.description}</CardDescription>

@@ -8,10 +8,11 @@ import {
   SidebarMenuButton,
 } from '@/components/ui/sidebar';
 import {
-  Inbox,
   LayoutDashboard,
   MessageCircle,
   Calendar,
+  Users,
+  Bell,
   Settings,
 } from 'lucide-react';
 import { useApp } from '@/hooks/use-app';
@@ -28,10 +29,11 @@ export function AppSidebarNav() {
   const { t } = useApp();
 
   const navItems: NavItem[] = [
-    { href: '/emails', labelKey: 'inbox', icon: <Inbox /> },
     { href: '/dashboard', labelKey: 'dashboard', icon: <LayoutDashboard /> },
     { href: '/chat', labelKey: 'chat', icon: <MessageCircle /> },
-    { href: '/calendar', labelKey: 'calendar', icon: <Calendar /> },
+    { href: '/agenda', labelKey: 'calendar', icon: <Calendar /> },
+    { href: '/contacts', labelKey: 'contacts', icon: <Users /> },
+    { href: '/reminders', labelKey: 'reminders', icon: <Bell /> },
   ];
 
   const settingsNav: NavItem = {
@@ -41,6 +43,10 @@ export function AppSidebarNav() {
   };
 
   const isActive = (href: string) => {
+    // Exact match for dashboard, otherwise startsWith
+    if (href === '/dashboard') {
+      return pathname === href;
+    }
     return pathname.startsWith(href);
   };
 

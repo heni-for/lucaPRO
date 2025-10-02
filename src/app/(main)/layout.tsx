@@ -32,7 +32,7 @@ function Header() {
   const { isMobile } = useSidebar();
   
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-background px-4 lg:h-[60px] lg:px-6">
+    <header className="flex h-14 items-center gap-4 border-b bg-transparent px-4 lg:h-[60px] lg:px-6">
       {isMobile && <SidebarTrigger />}
       <div className="w-full flex-1">
         <form>
@@ -41,7 +41,7 @@ function Header() {
             <Input
               type="search"
               placeholder={t('search_emails')}
-              className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
+              className="w-full appearance-none bg-background/60 pl-8 shadow-none md:w-2/3 lg:w-1/3"
             />
           </div>
         </form>
@@ -85,26 +85,28 @@ export default function AppLayout({
 }) {
   const { dir } = useApp();
   return (
-    <SidebarProvider>
-      <Sidebar
-        variant="sidebar"
-        collapsible="icon"
-        className="border-sidebar-border bg-sidebar text-sidebar-foreground"
-        side={dir === 'rtl' ? 'right' : 'left'}
-      >
-        <SidebarHeader className="p-4">
-          <Logo />
-        </SidebarHeader>
-        <SidebarContent className="p-2">
-          <AppSidebarNav />
-        </SidebarContent>
-      </Sidebar>
-      <SidebarInset>
-        <Header />
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-muted/40">
-          {children}
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-950 dark:to-indigo-950">
+      <SidebarProvider>
+        <Sidebar
+          variant="sidebar"
+          collapsible="icon"
+          className="border-sidebar-border bg-background/80 backdrop-blur-sm text-sidebar-foreground"
+          side={dir === 'rtl' ? 'right' : 'left'}
+        >
+          <SidebarHeader className="p-4">
+            <Logo />
+          </SidebarHeader>
+          <SidebarContent className="p-2">
+            <AppSidebarNav />
+          </SidebarContent>
+        </Sidebar>
+        <SidebarInset>
+          <Header />
+          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-transparent">
+            {children}
+          </main>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
   );
 }

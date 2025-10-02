@@ -12,7 +12,7 @@ export default function SettingsPage() {
 
   return (
     <div className="grid gap-6" dir={dir}>
-        <Card>
+        <Card className="bg-background/80 backdrop-blur-sm">
         <CardHeader>
             <CardTitle>{t('ai_settings')}</CardTitle>
             <CardDescription>{t('ai_settings_description')}</CardDescription>
@@ -38,7 +38,7 @@ export default function SettingsPage() {
             </div>
         </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-background/80 backdrop-blur-sm">
             <CardHeader>
                 <CardTitle>{t('processing_parameters')}</CardTitle>
                 <CardDescription>{t('processing_parameters_description')}</CardDescription>
@@ -53,29 +53,6 @@ export default function SettingsPage() {
                     <Label htmlFor="max-tokens">{t('max_tokens_label')}</Label>
                     <Slider id="max-tokens" defaultValue={[256]} min={50} max={512} step={16} disabled />
                     <p className="text-sm text-muted-foreground">{t('max_tokens_description')}</p>
-                </div>
-            </CardContent>
-        </Card>
-        <Card>
-            <CardHeader>
-                <CardTitle>{t('email_sync')}</CardTitle>
-                <CardDescription>{t('email_sync_description')}</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-6">
-                 <div className="grid gap-2">
-                    <Label htmlFor="sync-interval">{t('sync_interval_label')}</Label>
-                    <Select defaultValue="5" disabled>
-                        <SelectTrigger id="sync-interval" className="w-[180px]">
-                            <SelectValue placeholder="Select interval" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="5">5 minutes</SelectItem>
-                            <SelectItem value="10">10 minutes</SelectItem>
-                            <SelectItem value="15">15 minutes</SelectItem>
-                            <SelectItem value="30">30 minutes</SelectItem>
-                        </SelectContent>
-                    </Select>
-                    <p className="text-sm text-muted-foreground">{t('sync_interval_description')}</p>
                 </div>
             </CardContent>
         </Card>

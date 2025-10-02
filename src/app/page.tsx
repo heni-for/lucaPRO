@@ -11,8 +11,8 @@ import { useApp } from '@/hooks/use-app';
 export default function RootPage() {
   const { t, dir } = useApp();
   return (
-    <div className="flex flex-col min-h-screen bg-muted/40">
-      <header className="px-4 lg:px-6 h-14 flex items-center bg-background border-b">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-indigo-100 via-white to-cyan-100 dark:from-gray-900 dark:via-gray-950 dark:to-indigo-950">
+      <header className="px-4 lg:px-6 h-14 flex items-center bg-transparent">
         <Logo />
       </header>
       <main className="flex-1 flex items-center justify-center">
@@ -28,7 +28,7 @@ export default function RootPage() {
                         </p>
                     </div>
                 </div>
-                 <Card dir={dir}>
+                 <Card dir={dir} className="bg-background/80 backdrop-blur-sm">
                     <CardHeader>
                         <CardTitle>{t('login')}</CardTitle>
                         <CardDescription>{t('login_description')}</CardDescription>
@@ -45,7 +45,7 @@ export default function RootPage() {
                     </CardContent>
                     <CardFooter>
                         <Button asChild className="w-full">
-                            <Link href="/emails">
+                            <Link href="/dashboard">
                                 {t('login')}
                             </Link>
                         </Button>
