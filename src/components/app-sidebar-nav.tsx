@@ -16,6 +16,7 @@ import {
   Settings,
   HeartPulse,
   FileText,
+  Brain,
 } from 'lucide-react';
 import { useApp } from '@/hooks/use-app';
 import type { TranslationKey } from '@/lib/translations';
@@ -38,6 +39,7 @@ export function AppSidebarNav() {
     { href: '/contacts', labelKey: 'contacts', icon: <Users /> },
     { href: '/health', labelKey: 'health_habits', icon: <HeartPulse /> },
     { href: '/notes', labelKey: 'notes_knowledge', icon: <FileText /> },
+    { href: '/memory', labelKey: 'memory', icon: <Brain /> },
   ];
 
   const settingsNav: NavItem = {
