@@ -179,7 +179,7 @@ export default function ChatPage() {
   return (
     <div className="flex flex-col h-full max-h-[calc(100vh-8rem)]">
         <audio ref={audioRef} className="hidden" />
-        <Card className="flex flex-col flex-1 bg-background/80 backdrop-blur-sm" dir={dir}>
+        <Card className="flex flex-col flex-1 bg-card" dir={dir}>
         <CardHeader className="flex-row items-center">
             <div className='flex-1'>
                 <CardTitle>{t('chat')}</CardTitle>

@@ -25,7 +25,7 @@ export default function AgendaPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {planningItems.length === 0 ? (
-          <Card className="md:col-span-2 lg:col-span-3 bg-background/80 backdrop-blur-sm">
+          <Card className="md:col-span-2 lg:col-span-3 bg-card">
             <CardContent className="flex flex-col items-center justify-center gap-4 text-center h-80">
               <CalendarIcon className="w-16 h-16 text-muted-foreground" />
               <p className="text-lg font-semibold">{t('no_events')}</p>
@@ -36,7 +36,7 @@ export default function AgendaPage() {
           planningItems
             .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
             .map((item) => (
-            <Card key={item.id} className="bg-background/80 backdrop-blur-sm">
+            <Card key={item.id} className="bg-card">
               <CardHeader>
                 <CardTitle>{item.title}</CardTitle>
                 <CardDescription>{item.description}</CardDescription>

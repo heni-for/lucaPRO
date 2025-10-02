@@ -28,7 +28,7 @@ export default function RootPage() {
                         </p>
                     </div>
                 </div>
-                 <Card dir={dir} className="bg-background/80 backdrop-blur-sm">
+                 <Card dir={dir} className="bg-card">
                     <CardHeader>
                         <CardTitle>{t('login')}</CardTitle>
                         <CardDescription>{t('login_description')}</CardDescription>

@@ -16,7 +16,7 @@ export default function DashboardPage() {
             <p className="text-muted-foreground">Here's a summary of your day with Luca.</p>
         </div>
 
-        <Card className="lg:col-span-2 bg-background/80 backdrop-blur-sm">
+        <Card className="lg:col-span-2 bg-card">
             <CardHeader>
                 <CardTitle>{t('chat')}</CardTitle>
                 <CardDescription>{t('chat_description')}</CardDescription>
@@ -31,7 +31,7 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
 
-        <Card className="lg:col-span-2 bg-background/80 backdrop-blur-sm">
+        <Card className="lg:col-span-2 bg-card">
             <CardHeader>
                 <CardTitle>{t('calendar')}</CardTitle>
                 <CardDescription>Your upcoming events and appointments.</CardDescription>
@@ -46,7 +46,7 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
 
-        <Card className="bg-background/80 backdrop-blur-sm">
+        <Card className="bg-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t('reminders')}</CardTitle>
             <Clock className="h-4 w-4 text-muted-foreground" />
@@ -59,7 +59,7 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
         
-        <Card className="bg-background/80 backdrop-blur-sm">
+        <Card className="bg-card">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t('contacts')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -72,7 +72,7 @@ export default function DashboardPage() {
             </CardContent>
         </Card>
 
-         <Card className="lg:col-span-4 bg-background/80 backdrop-blur-sm">
+         <Card className="lg:col-span-4 bg-card">
             <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
                 <CardDescription>Some suggestions to get started with Luca.</CardDescription>

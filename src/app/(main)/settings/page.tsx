@@ -12,7 +12,7 @@ export default function SettingsPage() {
 
   return (
     <div className="grid gap-6" dir={dir}>
-        <Card className="bg-background/80 backdrop-blur-sm">
+        <Card className="bg-card">
         <CardHeader>
             <CardTitle>{t('ai_settings')}</CardTitle>
             <CardDescription>{t('ai_settings_description')}</CardDescription>
@@ -38,7 +38,7 @@ export default function SettingsPage() {
             </div>
         </CardContent>
         </Card>
-        <Card className="bg-background/80 backdrop-blur-sm">
+        <Card className="bg-card">
             <CardHeader>
                 <CardTitle>{t('processing_parameters')}</CardTitle>
                 <CardDescription>{t('processing_parameters_description')}</CardDescription>

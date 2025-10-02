@@ -10,7 +10,7 @@ export default function RemindersPage() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold">{t('reminders')}</h1>
-      <Card className="bg-background/80 backdrop-blur-sm">
+      <Card className="bg-card">
         <CardContent className="flex flex-col items-center justify-center gap-4 text-center h-80">
           <Bell className="w-16 h-16 text-muted-foreground" />
           <h3 className="text-2xl font-bold tracking-tight">No Reminders</h3>
