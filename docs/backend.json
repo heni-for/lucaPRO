@@ -1,0 +1,242 @@
+
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Represents a user's profile and their personalized settings for Luca.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address."
+        },
+        "settings": {
+          "type": "object",
+          "description": "User-specific settings for Luca's behavior.",
+          "properties": {
+            "language": {
+              "type": "string",
+              "enum": ["en", "fr", "derja"],
+              "default": "derja"
+            },
+            "reminderDefault": {
+              "type": "number",
+              "description": "Default minutes before an event to send a reminder.",
+              "default": 30
+            }
+          }
+        }
+      },
+      "required": ["name", "email"]
+    },
+    "Event": {
+      "title": "Event / Agenda Item",
+      "description": "Represents a single event, task, or appointment in the user's agenda.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "place": {
+          "type": "string"
+        },
+        "people": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Meeting", "Travel", "Health", "Personal", "Work", "School"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Planned", "Confirmed", "Done", "Canceled"]
+        },
+        "eventDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "time"
+        },
+        "reminderTime": {
+          "type": "string",
+          "format": "time"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["voice", "chat", "manual"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this event."
+        }
+      },
+      "required": ["title", "eventDate", "startTime", "status", "userId"]
+    },
+    "Reminder": {
+      "title": "Standalone Reminder",
+      "description": "A simple reminder for a task not linked to a full event.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "remindAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "done", "snoozed"],
+          "default": "pending"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this reminder."
+        }
+      },
+      "required": ["message", "remindAt", "userId"]
+    },
+    "Contact": {
+      "title": "Contact",
+      "description": "Represents a person Luca has learned about.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "relation": {
+          "type": "string",
+          "description": "e.g., Mother, Friend, Colleague"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this contact."
+        }
+      },
+      "required": ["name", "userId"]
+    },
+    "Memory": {
+      "title": "Personal Memory",
+      "description": "A piece of personal information Luca has learned about a user.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["habit", "note", "goal", "mood", "preference", "knowledge"]
+        },
+        "content": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Flexible field for additional structured data."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this memory."
+        }
+      },
+      "required": ["type", "content", "userId"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "A single message in a conversation between a user and Luca.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "type": "string",
+          "enum": ["user", "luca"]
+        },
+        "message": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this message."
+        }
+      },
+      "required": ["sender", "message", "createdAt", "userId"]
+    }
+  },
+  "auth": {
+    "providers": ["email"]
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "Stores public profiles for users."
+    },
+    "/users/{userId}/events": {
+      "schema": {
+        "$ref": "#/entities/Event"
+      },
+      "description": "Stores all agenda events for a specific user."
+    },
+    "/users/{userId}/reminders": {
+      "schema": {
+        "$ref": "#/entities/Reminder"
+      },
+      "description": "Stores standalone reminders for a specific user."
+    },
+    "/users/{userId}/contacts": {
+      "schema": {
+        "$ref": "#/entities/Contact"
+      },
+      "description": "Stores contacts a user has saved."
+    },
+    "/users/{userId}/memories": {
+      "schema": {
+        "$ref": "#/entities/Memory"
+      },
+      "description": "Stores all personal memories Luca has learned about a user."
+    },
+    "/users/{userId}/chats": {
+      "schema": {
+        "$ref": "#/entities/ChatMessage"
+      },
+      "description": "Stores the conversation history for a specific user."
+    }
+  }
+}
+
+    
