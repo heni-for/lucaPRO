@@ -17,6 +17,12 @@ import {
   HeartPulse,
   FileText,
   Brain,
+  DollarSign,
+  ShoppingCart,
+  Briefcase,
+  Plane,
+  Music,
+  FileArchive,
 } from 'lucide-react';
 import { useApp } from '@/hooks/use-app';
 import type { TranslationKey } from '@/lib/translations';
@@ -37,9 +43,15 @@ export function AppSidebarNav() {
     { href: '/agenda', labelKey: 'calendar', icon: <Calendar /> },
     { href: '/reminders', labelKey: 'reminders', icon: <Bell /> },
     { href: '/contacts', labelKey: 'contacts', icon: <Users /> },
-    { href: '/health', labelKey: 'health_habits', icon: <HeartPulse /> },
-    { href: '/notes', labelKey: 'notes_knowledge', icon: <FileText /> },
     { href: '/memory', labelKey: 'memory', icon: <Brain /> },
+    { href: '/health', labelKey: 'health_habits', icon: <HeartPulse /> },
+    { href: '/finance', labelKey: 'finance', icon: <DollarSign /> },
+    { href: '/shopping', labelKey: 'shopping_wish_list', icon: <ShoppingCart /> },
+    { href: '/work', labelKey: 'work_school', icon: <Briefcase /> },
+    { href: '/travel', labelKey: 'travel_journal', icon: <Plane /> },
+    { href: '/media', labelKey: 'media_favorites', icon: <Music /> },
+    { href: '/files', labelKey: 'files_docs', icon: <FileArchive /> },
+    { href: '/notes', labelKey: 'notes_knowledge', icon: <FileText /> },
   ];
 
   const settingsNav: NavItem = {
@@ -53,7 +65,7 @@ export function AppSidebarNav() {
     if (href === '/dashboard') {
       return pathname === href;
     }
-    return pathname.startsWith(href);
+    return pathname.startsWith(href) && href !== '/';
   };
 
   return (
