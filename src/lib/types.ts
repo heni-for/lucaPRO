@@ -52,12 +52,10 @@ export type Memory = {
 };
 
 export type ChatMessage = {
-  id?: string; // Firestore document ID
-  sender: 'user' | 'luca';
-  message: string;
-  createdAt: string; // ISO date-time string
-  userId: string;
+  role: 'user' | 'model';
+  content: string;
 };
+
 
 // Merging previous types for UI that might not be in the backend yet
 export type Email = {
@@ -90,7 +88,7 @@ export type PlanningItem = {
     items?: string[];
     category?: 'Meeting' | 'Travel' | 'Health' | 'Work' | 'Personal';
     status: 'Planned' | 'Confirmed' | 'Done' | 'Canceled';
-    source: 'voice' | 'chat'-manual';
+    source: 'voice' | 'chat' | 'manual';
     created_at?: string;
     updated_at?: string;
 };

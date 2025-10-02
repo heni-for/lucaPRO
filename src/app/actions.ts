@@ -48,7 +48,13 @@ export async function textToSpeechAction(text: string): Promise<{ audioUrl?: str
 
 export async function chatWithHistoryAction(history: ChatMessage[]): Promise<{ reply?: string; error?: string }> {
   try {
-    const result = await continueConversation({ history });
+    const historyForAI = history.map(m => ({
+      role: m.sender === 'luca' ? 'model' as const : 'user' as const,
+      content: m.message,
+    }));
+
+    // The AI expects an array of { role, content }
+    const result = await continueConversation({ history: historyForAI });
     return { reply: result.reply };
   } catch (error) {
     console.error('Error in conversation:', error);

@@ -37,15 +37,14 @@ const conversationalChatFlow = ai.defineFlow(
   },
   async ({history}) => {
     
-    // Get the last user message
-    const lastUserMessage = history.pop();
+    const lastUserMessage = history[history.length -1];
     if (!lastUserMessage || lastUserMessage.role !== 'user') {
-      return { reply: "فماش سؤال؟" };
+        return { reply: "فماش سؤال؟" }; // No question?
     }
 
     const { text } = await ai.generate({
         system: 'You are an AI assistant named Luca. You MUST reply exclusively in Tunisian Derja. Do not use any other language.',
-        history: history.map(m => ({ role: m.role, content: [{ text: m.content }] })),
+        history: history.slice(0, -1).map(m => ({ role: m.role, content: [{ text: m.content }] })),
         prompt: lastUserMessage.content,
     });
 
