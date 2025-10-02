@@ -15,14 +15,23 @@ export type Email = {
 };
 
 export type PlanningItem = {
-  id: string;
-  title: string;
-  description: string;
-  startTime: string;
-  endTime: string;
-  location?: string;
-  source: 'email' | 'conversation' | 'manual';
-  sourceId?: string; // e.g., email.id
+    id: string;
+    user_id?: string;
+    title: string;
+    description?: string;
+    date: string;
+    time: string;
+    end_time?: string;
+    reminder_time: string;
+    place?: string;
+    place_type?: 'Home' | 'Cafe' | 'Office' | 'Online' | 'Other';
+    people?: string[];
+    items?: string[];
+    category?: 'Meeting' | 'Travel' | 'Health' | 'Work' | 'Personal';
+    status: 'Planned' | 'Confirmed' | 'Done' | 'Canceled';
+    source: 'voice' | 'chat' | 'manual';
+    created_at?: string;
+    updated_at?: string;
 };
 
 export type ChatMessage = {
