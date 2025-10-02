@@ -1,14 +1,20 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Clock, Mail, Users, Star, MessageCircle, Calendar } from 'lucide-react';
+import { Clock, Users, ArrowRight, Calendar, MessageCircle } from 'lucide-react';
 import { useApp } from '@/hooks/use-app';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { planningItems as mockPlanningItems } from '@/lib/data';
+import type { PlanningItem } from '@/lib/types';
+import { format } from 'date-fns';
+import { Badge } from '@/components/ui/badge';
 
 export default function DashboardPage() {
     const { t, dir } = useApp();
+    const today = new Date().toISOString().split('T')[0];
+    const todaysEvents = mockPlanningItems.filter(item => item.date === today);
+
   return (
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4" dir={dir}>
         <div className="lg:col-span-4">
@@ -17,13 +23,20 @@ export default function DashboardPage() {
         </div>
 
         <Card className="lg:col-span-2 bg-card">
-            <CardHeader>
-                <CardTitle>{t('chat')}</CardTitle>
-                <CardDescription>{t('chat_description')}</CardDescription>
+            <CardHeader className='flex-row items-center justify-between'>
+                <div>
+                    <CardTitle>{t('chat')}</CardTitle>
+                    <CardDescription>{t('chat_description')}</CardDescription>
+                </div>
+                 <Button asChild variant="outline" size="icon">
+                    <Link href="/chat">
+                        <MessageCircle className="h-4 w-4" />
+                    </Link>
+                </Button>
             </CardHeader>
             <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">Your recent conversations with Luca will appear here.</p>
-                 <Button asChild variant="outline">
+                 <Button asChild variant="secondary">
                     <Link href="/chat">
                         Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
@@ -32,17 +45,33 @@ export default function DashboardPage() {
         </Card>
 
         <Card className="lg:col-span-2 bg-card">
-            <CardHeader>
-                <CardTitle>{t('calendar')}</CardTitle>
-                <CardDescription>Your upcoming events and appointments.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">Today's events will be shown here.</p>
-                 <Button asChild variant="outline">
+            <CardHeader className='flex-row items-center justify-between'>
+                <div>
+                    <CardTitle>{t('calendar')}</CardTitle>
+                    <CardDescription>Your upcoming events for today.</CardDescription>
+                </div>
+                 <Button asChild variant="outline" size="icon">
                     <Link href="/agenda">
-                        View Agenda <ArrowRight className="ml-2 h-4 w-4" />
+                        <Calendar className="h-4 w-4" />
                     </Link>
                 </Button>
+            </CardHeader>
+            <CardContent>
+                {todaysEvents.length > 0 ? (
+                    <div className="space-y-4">
+                        {todaysEvents.map(item => (
+                            <div key={item.id} className="flex items-center justify-between p-2 rounded-lg bg-muted/50">
+                                <div>
+                                    <p className="font-semibold">{item.title}</p>
+                                    <p className="text-sm text-muted-foreground">{item.time}</p>
+                                </div>
+                                <Badge variant="secondary">{item.status}</Badge>
+                            </div>
+                        ))}
+                    </div>
+                ): (
+                     <p className="text-sm text-muted-foreground">You have no events scheduled for today.</p>
+                )}
             </CardContent>
         </Card>
 
@@ -52,9 +81,9 @@ export default function DashboardPage() {
             <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-            <div className="text-2xl font-bold">3</div>
+            <div className="text-2xl font-bold">{mockPlanningItems.length}</div>
             <p className="text-xs text-muted-foreground">
-                upcoming reminders today
+                total upcoming reminders
             </p>
             </CardContent>
         </Card>
@@ -65,9 +94,9 @@ export default function DashboardPage() {
             <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-            <div className="text-2xl font-bold">5</div>
+            <div className="text-2xl font-bold">2</div>
             <p className="text-xs text-muted-foreground">
-                new people mentioned
+                people in your contacts
             </p>
             </CardContent>
         </Card>

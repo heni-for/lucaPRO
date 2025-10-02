@@ -129,6 +129,7 @@ export const planningItems: PlanningItem[] = [
       category: 'Personal',
       status: 'Planned',
       source: 'voice',
+      created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(),
     },
     {
       id: 'evt-2',
@@ -141,8 +142,9 @@ export const planningItems: PlanningItem[] = [
       people: [],
       items: ['Medicine box'],
       category: 'Health',
-      status: 'Planned',
+      status: 'Confirmed',
       source: 'manual',
+      created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7).toISOString(),
     },
     {
       id: 'evt-3',
@@ -157,5 +159,6 @@ export const planningItems: PlanningItem[] = [
       category: 'Travel',
       status: 'Confirmed',
       source: 'voice',
+       created_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5).toISOString(),
     },
 ];
